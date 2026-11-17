@@ -1,0 +1,51 @@
+erDiagram
+    INGREDIENT {
+        int id PK
+        string name
+        string baseUnit
+        int quantity
+        int kcal
+    }
+    RECIPE {
+        int id PK
+        string name
+        int servingsAmount
+    }
+    RECIPE-INGREDIENT {
+        int ingredientId FK
+        int recipeId FK
+        int quantity
+    }
+    MEAL {
+        int mealPlan FK
+        int mainDishId FK
+        int dessertId FK
+        int servingsAmount
+    }
+    MEAL-PLAN {
+        int id PK
+        int daysAmount
+    }
+    STOCK {
+        int id PK
+        int ingredientId FK
+        int amount
+    }
+    SHOPPING-LIST-ITEM {
+        int shoppingListId FK
+        int ingredientId FK
+        int amount
+    }
+    SHOPPING-LIST {
+        int id PK
+        int mealPlanId FK
+    }
+    RECIPE ||--|{ RECIPE-INGREDIENT : has
+    INGREDIENT ||--o{ RECIPE-INGREDIENT : has
+    MEAL ||--|| RECIPE : mainDish
+    MEAL ||--|| RECIPE : dessert
+    MEAL-PLAN ||--|{ MEAL : has
+    STOCK ||--|| INGREDIENT : has
+    SHOPPING-LIST-ITEM ||--|| INGREDIENT : has
+    SHOPPING-LIST ||--|{ SHOPPING-LIST-ITEM : has
+    SHOPPING-LIST ||--|| MEAL-PLAN : has
